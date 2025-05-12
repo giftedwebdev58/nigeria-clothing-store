@@ -60,6 +60,8 @@ export default function DashboardOrders() {
                     throw new Error('Failed to fetch orders');
                 }
                 const data = await response.json();
+
+                console.log(data.orders)
                 setAllOrders(data.orders);
                 setTotalOrders(data.total);
                 setTotalPages(data.totalPages);
@@ -77,10 +79,7 @@ export default function DashboardOrders() {
         return new Intl.NumberFormat(locale).format(price);
     }
 
-    const currentOrders = allOrders.slice(
-        (currentPage - 1) * ITEMS_PER_PAGE,
-        currentPage * ITEMS_PER_PAGE
-    );
+    const currentOrders = allOrders
 
     const handleSearch = async () => {
         if (!searchQuery.trim()) return;

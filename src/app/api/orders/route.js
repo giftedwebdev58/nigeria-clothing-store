@@ -47,8 +47,8 @@ export async function GET(request) {
         
         // Get pagination parameters from query string
         const page = parseInt(searchParams.get('page')) || 1;
-        const limit = parseInt(searchParams.get('limit')) || 8; // Default to 8 items per page
-        
+        const limit = parseInt(searchParams.get('limit')) || 8;
+
         // Calculate skip value for pagination
         const skip = (page - 1) * limit;
         
@@ -69,6 +69,7 @@ export async function GET(request) {
                 .skip(skip)
                 .limit(limit)
                 .lean();
+            console.log(orders)
         }
         
         // Transform the data to match frontend expectations
