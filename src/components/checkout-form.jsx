@@ -99,9 +99,7 @@ export default function CheckoutForm({ onSubmit, formData, setFormData }) {
                                 value={formData.country}
                                 onChange={handleChange}
                             >
-                                <option>United States</option>
-                                <option>Canada</option>
-                                <option>United Kingdom</option>
+                                <option>Nigeria</option>
                             </select>
                         </div>
                     </div>

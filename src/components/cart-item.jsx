@@ -23,7 +23,7 @@ export default function CartItem({ item, onRemove, onQuantityChange }) {
                 </div>
             </div>
             <div className="text-sm font-medium text-slate-900">
-                ${item.price.toFixed(2)}
+                ₦{item.price.toFixed(2)}
             </div>
             <div>
                 <select
@@ -40,7 +40,7 @@ export default function CartItem({ item, onRemove, onQuantityChange }) {
             </div>
             <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-slate-900">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    ₦{(item.price * item.quantity).toFixed(2)}
                 </span>
                 <Button 
                     variant="ghost" 

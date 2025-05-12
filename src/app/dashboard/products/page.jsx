@@ -201,12 +201,12 @@ export default function DashboardProduct() {
                                         </div>
                                     </TableCell>
                                     <TableCell>
-                                        ${product.basePrice.toFixed(2)}
+                                        ₦{product.basePrice.toFixed(2)}
                                         {product.variants.length > 0 && (
                                             <>
                                                 <br />
                                                 <span className="text-xs text-muted-foreground">
-                                                    +${Math.max(...product.variants.map(v => v.priceAdjustment || 0)).toFixed(2)} max adj.
+                                                    +₦{Math.max(...product.variants.map(v => v.priceAdjustment || 0)).toFixed(2)} max adj.
                                                 </span>
                                             </>
                                         )}
@@ -274,7 +274,7 @@ export default function DashboardProduct() {
                                                 <div className="space-y-1">
                                                     <p className="font-semibold">{variant.name}</p>
                                                     <p className="text-sm text-muted-foreground">
-                                                        Price Adj: ${(variant.priceAdjustment || 0).toFixed(2)} | Stock: {variant.stock}
+                                                        Price Adj: ₦{(variant.priceAdjustment || 0).toFixed(2)} | Stock: {variant.stock}
                                                     </p>
                                                 </div>
                                             </div>

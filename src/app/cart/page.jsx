@@ -10,8 +10,7 @@ export default function CartPage() {
     const { items: cartItems, removeItem, updateQuantity, getTotalPrice } = useCartStore();
     const subtotal = getTotalPrice();
     const shipping = 5.99;
-    const tax = subtotal * 0.1;
-    const total = subtotal + shipping + tax;
+    const total = subtotal + shipping;
 
     const handleQuantityChange = (itemId, newQuantity) => {
         if (newQuantity > 0) {
@@ -59,7 +58,7 @@ export default function CartPage() {
                                                     {item.color} / {item.size}
                                                 </p>
                                                 <p className="text-sm font-medium text-slate-900 mt-1">
-                                                    ${item.price.toFixed(2)}
+                                                    ₦{item.price.toFixed(2)}
                                                 </p>
                                                 <div className="flex items-center justify-between mt-2">
                                                     <select
@@ -127,19 +126,15 @@ export default function CartPage() {
                             <div className="space-y-4">
                                 <div className="flex justify-between">
                                     <span className="text-slate-600">Subtotal</span>
-                                    <span className="font-medium">${subtotal.toFixed(2)}</span>
+                                    <span className="font-medium">₦{subtotal.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-slate-600">Shipping</span>
-                                    <span className="font-medium">${shipping.toFixed(2)}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span className="text-slate-600">Tax</span>
-                                    <span className="font-medium">${tax.toFixed(2)}</span>
+                                    <span className="font-medium">₦{shipping.toFixed(2)}</span>
                                 </div>
                                 <div className="border-t border-slate-200 pt-4 flex justify-between">
                                     <span className="text-base font-medium">Total</span>
-                                    <span className="text-base font-bold">${total.toFixed(2)}</span>
+                                    <span className="text-base font-bold">₦{total.toFixed(2)}</span>
                                 </div>
                             </div>
                             <Link href="/checkout">

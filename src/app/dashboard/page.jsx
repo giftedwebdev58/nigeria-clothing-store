@@ -16,6 +16,8 @@ export default function AdminDashboardPage() {
                     throw new Error('Failed to fetch dashboard data');
                 }
                 const data = await response.json();
+
+                console.log(data)
                 setDashboardData(data);
             } catch (err) {
                 setError(err.message);
@@ -26,6 +28,10 @@ export default function AdminDashboardPage() {
 
         fetchDashboardData();
     }, []);
+
+    function formatNumber(price) {
+        return new Intl.NumberFormat().format(price);
+    }
 
     if (loading) {
         return (
@@ -128,13 +134,15 @@ export default function AdminDashboardPage() {
                                         <tr key={order.id}>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">{order.id}</td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{order.customer}</td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{order.date}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                                                {order.timestamp}
+                                            </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClasses[order.status] || 'bg-gray-100 text-gray-800'}`}>
                                                     {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{order.total}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">₦{formatNumber(order.total)}</td>
                                         </tr>
                                     );
                                 })}

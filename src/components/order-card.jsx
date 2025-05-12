@@ -44,7 +44,7 @@ export default function OrderCard({ order }) {
                     <div className="ml-4">
                         <h5 className="text-sm font-medium text-slate-900">{item.name}</h5>
                         <p className="text-sm text-slate-500">
-                        Qty: {item.quantity} · ${item.price.toFixed(2)}
+                        Qty: {item.quantity} · ₦{item.price.toFixed(2)}
                         </p>
                     </div>
                     </div>
@@ -56,19 +56,15 @@ export default function OrderCard({ order }) {
                 <div className="space-y-2">
                 <div className="flex justify-between">
                     <span className="text-sm text-slate-600">Subtotal</span>
-                    <span className="text-sm font-medium">${order.total.toFixed(2)}</span>
+                    <span className="text-sm font-medium">₦{order.total.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                     <span className="text-sm text-slate-600">Shipping</span>
-                    <span className="text-sm font-medium">$5.99</span>
-                </div>
-                <div className="flex justify-between">
-                    <span className="text-sm text-slate-600">Tax</span>
-                    <span className="text-sm font-medium">$9.60</span>
+                    <span className="text-sm font-medium">₦5,000</span>
                 </div>
                 <div className="border-t border-slate-200 pt-2 flex justify-between">
                     <span className="text-sm font-medium">Total</span>
-                    <span className="text-sm font-bold">${(order.total + 5.99 + 9.6).toFixed(2)}</span>
+                    <span className="text-sm font-bold">₦{(order.total + 5000 + 9.6).toFixed(2)}</span>
                 </div>
                 </div>
             </div>

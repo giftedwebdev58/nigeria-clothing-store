@@ -6,6 +6,7 @@ import Order from "../../../../models/orders";
 import { logActivity } from "@/lib/activityLogger";
 import { Activities } from "@/lib/activityLogger";
 import { sendEmail } from "@/lib/sendEmail";
+import { generateSimpleSellerOrderNotificationTemplate } from "@/lib/email-template/content";
 
 
 
@@ -226,6 +227,7 @@ export async function POST(request) {
             { status: 201 }
         );
     } catch (error) {
+        console.log(error)
         return new Response(
             JSON.stringify({ message: "Internal Server Error." }),
             { status: 500 }

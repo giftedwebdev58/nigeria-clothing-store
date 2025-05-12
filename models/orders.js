@@ -26,7 +26,7 @@ const OrderSchema = new mongoose.Schema({
         },
         country: {
             type: String,
-            default: "United States"
+            default: "Nigeria"
         },
         state: {
             type: String,

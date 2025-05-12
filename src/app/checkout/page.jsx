@@ -21,11 +21,15 @@ export default function CheckoutPage() {
         address: "",
         apartment: "",
         city: "",
-        country: "United States",
+        country: "Nigeria",
         state: "",
         zip: "",
         phone: ""
     });
+
+    function formatNumber(price) {
+        return new Intl.NumberFormat().format(price);
+    }
 
     useEffect(() => {
         setIsMounted(true);
@@ -35,9 +39,8 @@ export default function CheckoutPage() {
     }, []);
 
     const subtotal = isMounted ? getTotalPrice() : 0;
-    const shipping = 5.99;
-    const tax = subtotal * 0.1;
-    const total = subtotal + shipping + tax;
+    const shipping = 3000;
+    const total = subtotal + shipping;
 
     const handleFormSubmit = (data) => {
         setFormData(data);
@@ -67,8 +70,8 @@ export default function CheckoutPage() {
                     const orderData = {
                         formData,
                         items: cartItems,
-                        tax: tax,
                         shipping: shipping,
+                        tax: 0,
                         total: total,
                         transactionId: transaction.reference,
                     };
@@ -143,7 +146,7 @@ export default function CheckoutPage() {
                                                     {item.color} / {item.size}
                                                 </p>
                                                 <p className="text-sm font-medium text-slate-900">
-                                                    {item.quantity} × ${item.price.toFixed(2)}
+                                                    {item.quantity} × ₦{formatNumber(item.price.toFixed(2))}
                                                 </p>
                                             </div>
                                         </div>
@@ -153,19 +156,15 @@ export default function CheckoutPage() {
                                 <div className="space-y-4">
                                     <div className="flex justify-between">
                                         <span className="text-slate-600">Subtotal</span>
-                                        <span className="font-medium">${subtotal.toFixed(2)}</span>
+                                        <span className="font-medium">₦{formatNumber(subtotal.toFixed(2))}</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-slate-600">Shipping</span>
-                                        <span className="font-medium">${shipping.toFixed(2)}</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span className="text-slate-600">Tax</span>
-                                        <span className="font-medium">${tax.toFixed(2)}</span>
+                                        <span className="font-medium">₦{formatNumber(shipping.toFixed(2))}</span>
                                     </div>
                                     <div className="border-t border-slate-200 pt-4 flex justify-between">
                                         <span className="text-base font-medium">Total</span>
-                                        <span className="text-base font-bold">${total.toFixed(2)}</span>
+                                        <span className="text-base font-bold">₦{formatNumber(total.toFixed(2))}</span>
                                     </div>
                                 </div>
 

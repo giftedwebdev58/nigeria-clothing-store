@@ -175,18 +175,22 @@ export default function ProductActions({ product }) {
         return product.basePrice;
     }, [currentVariant, product.basePrice]);
 
+    function formatNumber(price) {
+        return new Intl.NumberFormat().format(price);
+    }
+
     return (
         <div className="max-w-md">
             <h1 className="text-2xl font-bold text-slate-900">{product.name}</h1>
 
             <div className="flex items-center mt-2">
                 <p className="text-2xl font-semibold text-slate-900">
-                    ${displayPrice.toFixed(2)}
+                    ₦{formatNumber(displayPrice.toFixed(2))}
                 </p>
                 {(currentVariant?.price || currentVariant?.priceAdjustment !== 0) &&
                     displayPrice !== product.basePrice && (
                         <p className="ml-2 text-sm text-slate-500 line-through">
-                            ${product.basePrice.toFixed(2)}
+                            ₦{formatNumber(product.basePrice.toFixed(2))}
                         </p>
                     )}
             </div>
@@ -244,7 +248,7 @@ export default function ProductActions({ product }) {
                 <h2 className="text-sm font-medium text-slate-900">Size</h2>
                 {selectedSize && (
                     <span className="text-xs text-slate-500">
-                    Selected: {selectedSize}
+                        Selected: {selectedSize}
                     </span>
                 )}
                 </div>

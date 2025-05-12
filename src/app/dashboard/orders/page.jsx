@@ -73,6 +73,10 @@ export default function DashboardOrders() {
         fetchOrders();
     }, [currentPage]);
 
+    function formatNumber(price, locale = 'en-US') {
+        return new Intl.NumberFormat(locale).format(price);
+    }
+
     const currentOrders = allOrders.slice(
         (currentPage - 1) * ITEMS_PER_PAGE,
         currentPage * ITEMS_PER_PAGE
@@ -203,6 +207,8 @@ export default function DashboardOrders() {
         setIsDetailsDialogOpen(true);
     };
 
+    console.log(selectedOrder)
+
     const getStatusBadge = (status) => {
         switch (status) {
             case "pending":
@@ -306,7 +312,7 @@ export default function DashboardOrders() {
                     <TableCell className="font-medium">{`#${order.id.toString().substring(0, 4)}`}</TableCell>
                     <TableCell>{order.customer}</TableCell>
                     <TableCell className="hidden sm:table-cell">{order.date}</TableCell>
-                    <TableCell className="text-right">${order.total}</TableCell>
+                    <TableCell className="text-right">₦{formatNumber(order.total)}</TableCell>
                     <TableCell>
                     <div className="flex items-center gap-2">
                         {getStatusBadge(order.status)}
@@ -382,13 +388,13 @@ export default function DashboardOrders() {
                     <span key={`ellipsis-${index}`} className="px-2 py-1">...</span>
                 ) : (
                     <Button
-                    key={item}
-                    variant={currentPage === item ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => handlePageChange(item)}
-                    className="min-w-[2.5rem]"
+                        key={item}
+                        variant={currentPage === item ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => handlePageChange(item)}
+                        className="min-w-[2.5rem]"
                     >
-                    {item}
+                        {item}
                     </Button>
                 )
                 ))}
@@ -415,12 +421,12 @@ export default function DashboardOrders() {
                 <ChevronLeft className="h-4 w-4" />
                 </Button>
                 <Button
-                variant="outline"
-                size="sm"
-                onClick={handleNext}
-                disabled={currentPage === totalPages}
+                    variant="outline"
+                    size="sm"
+                    onClick={handleNext}
+                    disabled={currentPage === totalPages}
                 >
-                <ChevronRight className="h-4 w-4" />
+                    <ChevronRight className="h-4 w-4" />
                 </Button>
             </div>
             </div>
@@ -473,7 +479,7 @@ export default function DashboardOrders() {
             <DialogHeader className="sticky top-0 bg-background z-10">
                 <DialogTitle>Order Details - {`#${selectedOrder?.id.toString().substring(0, 4)}`}</DialogTitle>
                 <DialogDescription>
-                Order placed on {selectedOrder?.date}
+                    Order placed on {selectedOrder?.date}
                 </DialogDescription>
             </DialogHeader>
             
@@ -525,7 +531,7 @@ export default function DashboardOrders() {
                                     />
                                 </div>
                             </div>
-                            <p>${item.price}</p>
+                            <p>₦{formatNumber(item.price)}</p>
                         </div>
                     ))}
                     </div>
@@ -558,19 +564,15 @@ export default function DashboardOrders() {
                     <div className="space-y-2">
                         <div className="flex justify-between">
                         <p className="text-sm text-muted-foreground">Subtotal</p>
-                        <p>${selectedOrder.subtotal}</p>
+                        <p>₦{formatNumber(selectedOrder.subtotal)}</p>
                         </div>
                         <div className="flex justify-between">
                         <p className="text-sm text-muted-foreground">Shipping</p>
-                        <p>${selectedOrder.shipping}</p>
-                        </div>
-                        <div className="flex justify-between">
-                        <p className="text-sm text-muted-foreground">Tax</p>
-                        <p>${selectedOrder.tax}</p>
+                        <p>₦{formatNumber(selectedOrder.shipping)}</p>
                         </div>
                         <div className="flex justify-between font-medium pt-2 border-t">
-                        <p>Total</p>
-                        <p>${selectedOrder.total}</p>
+                            <p>Total</p>
+                            <p>₦{formatNumber(selectedOrder.total)}</p>
                         </div>
                     </div>
                     </div>

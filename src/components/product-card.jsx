@@ -4,6 +4,11 @@ import Image from "next/image";
 
 export default function ProductCard({ product }) {
     const isOnSale = product.originalPrice && product.originalPrice > product.price;
+
+    function formatNumber(price) {
+        return new Intl.NumberFormat().format(price);
+    }
+    
     return (
         <div className="group relative">
             <div className="w-full h-[400px] overflow-hidden rounded-md bg-slate-100 group-hover:opacity-75 relative">
@@ -33,11 +38,11 @@ export default function ProductCard({ product }) {
                 <div className="text-right">
                 {isOnSale && (
                     <p className="text-sm text-slate-500 line-through">
-                        ${product.originalPrice.toFixed(2)}
+                        ₦{formatNumber(product.originalPrice.toFixed(2))}
                     </p>
                 )}
                 <p className="text-sm font-medium text-slate-900">
-                    ${product.basePrice.toFixed(2)}
+                    ₦{formatNumber(product.basePrice.toFixed(2))}
                 </p>
                 </div>
             </div>
