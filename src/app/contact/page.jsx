@@ -28,8 +28,20 @@ export default function Contact() {
         setIsSubmitting(true);
         
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            const response = await fetch("/api/send-email", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            });
+            if (!response.ok) {
+                toast.error("Failed to send message. Please try again.");
+                return
+            }
+            
+            await response.json();
+
             
             toast.success("Message sent successfully!");
             setFormData({
@@ -39,6 +51,7 @@ export default function Contact() {
                 message: ""
             });
         } catch (error) {
+            console.error("Error sending message:", error);
             toast.error("Failed to send message. Please try again.");
         } finally {
             setIsSubmitting(false);
@@ -150,13 +163,13 @@ export default function Contact() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                    <div className="p-2 bg-green-100 rounded-full text-green-600">
-                    <Phone className="h-5 w-5" />
-                    </div>
+                    <a href="tel:09138214025" className="p-2 bg-green-100 rounded-full text-green-600 hover:bg-green-200 transition-colors">
+                        <Phone className="h-5 w-5" />
+                    </a>
                     <div>
-                    <h3 className="font-medium text-gray-900">Phone</h3>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
-                    <p className="text-gray-600 mt-1">Mon-Fri: 9am-5pm EST</p>
+                        <h3 className="font-medium text-gray-900">Phone</h3>
+                        <p className="text-gray-600">09138214025</p>
+                        <p className="text-gray-600 mt-1">Mon-Fri: 9am-5pm WAT</p>
                     </div>
                 </div>
 
@@ -167,8 +180,8 @@ export default function Contact() {
                     <div>
                     <h3 className="font-medium text-gray-900">Address</h3>
                     <p className="text-gray-600">123 Commerce Street</p>
-                    <p className="text-gray-600">Suite 456</p>
-                    <p className="text-gray-600">New York, NY 10001</p>
+                    <p className="text-gray-600">Magodo Phase 1</p>
+                    <p className="text-gray-600">Lagos, Nigeria</p>
                     </div>
                 </div>
 

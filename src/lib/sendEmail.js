@@ -26,6 +26,31 @@ export async function sendEmail(email, subject, html) {
     }
 }
 
+
+
+export async function sendEmailToAdmin(email, subject, html) {
+    try {
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            secure: true,
+            port: 465,
+            auth: {
+                user: process.env.EMAIL_ADDRESS,
+                pass: process.env.APP_PASSWORD,
+            },
+        });
+        const mailOptions = {
+            from: email,
+            to: process.env.EMAIL_ADDRESS,
+            subject,
+            html,
+        };
+        await transporter.sendMail(mailOptions);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
 export async function sendInquire(subject, html) {
     try {
         const transporter = nodemailer.createTransport({
